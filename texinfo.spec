@@ -4,7 +4,7 @@
 #
 Name     : texinfo
 Version  : 6.3
-Release  : 16
+Release  : 17
 URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.3.tar.xz
 Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.3.tar.xz
 Summary  : East Asian Width properties
