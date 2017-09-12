@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 6.4
-Release  : 18
-URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.4.tar.xz
-Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.4.tar.xz
-Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.4.tar.xz.sig
+Version  : 6.5
+Release  : 19
+URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
+Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
+Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz.sig
 Summary  : East Asian Width properties
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
@@ -68,14 +68,14 @@ locales components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-6.4
+%setup -q -n texinfo-6.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1499280440
+export SOURCE_DATE_EPOCH=1505258828
 %configure --disable-static --without-readline
 make V=1  %{?_smp_mflags}
 
@@ -87,7 +87,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1499280440
+export SOURCE_DATE_EPOCH=1505258828
 rm -rf %{buildroot}
 %make_install
 %find_lang texinfo_document
