@@ -6,7 +6,7 @@
 #
 Name     : texinfo
 Version  : 6.5
-Release  : 20
+Release  : 21
 URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
 Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
 Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz.sig
