@@ -6,20 +6,24 @@
 #
 Name     : texinfo
 Version  : 6.5
-Release  : 22
+Release  : 23
 URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
 Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
 Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz.sig
 Summary  : East Asian Width properties
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
-Requires: texinfo-bin
-Requires: texinfo-lib
-Requires: texinfo-doc
-Requires: texinfo-locales
-Requires: texinfo-data
+Requires: texinfo-bin = %{version}-%{release}
+Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-lib = %{version}-%{release}
+Requires: texinfo-license = %{version}-%{release}
+Requires: texinfo-locales = %{version}-%{release}
+Requires: texinfo-man = %{version}-%{release}
+BuildRequires : buildreq-cpan
+BuildRequires : glibc-locale
 BuildRequires : ncurses-dev
 BuildRequires : procps-ng
+Patch1: texinfo-6.5-fix-for-perl-5.28.patch
 
 %description
 the preferred documentation format for GNU software.
@@ -28,7 +32,9 @@ the preferred documentation format for GNU software.
 %package bin
 Summary: bin components for the texinfo package.
 Group: Binaries
-Requires: texinfo-data
+Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-license = %{version}-%{release}
+Requires: texinfo-man = %{version}-%{release}
 
 %description bin
 bin components for the texinfo package.
@@ -45,6 +51,7 @@ data components for the texinfo package.
 %package doc
 Summary: doc components for the texinfo package.
 Group: Documentation
+Requires: texinfo-man = %{version}-%{release}
 
 %description doc
 doc components for the texinfo package.
@@ -53,10 +60,19 @@ doc components for the texinfo package.
 %package lib
 Summary: lib components for the texinfo package.
 Group: Libraries
-Requires: texinfo-data
+Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-license = %{version}-%{release}
 
 %description lib
 lib components for the texinfo package.
+
+
+%package license
+Summary: license components for the texinfo package.
+Group: Default
+
+%description license
+license components for the texinfo package.
 
 
 %package locales
@@ -67,17 +83,26 @@ Group: Default
 locales components for the texinfo package.
 
 
+%package man
+Summary: man components for the texinfo package.
+Group: Default
+
+%description man
+man components for the texinfo package.
+
+
 %prep
 %setup -q -n texinfo-6.5
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505366491
+export SOURCE_DATE_EPOCH=1545953050
 %configure --disable-static --without-readline
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -87,8 +112,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1505366491
+export SOURCE_DATE_EPOCH=1545953050
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
+cp COPYING %{buildroot}/usr/share/package-licenses/texinfo/COPYING
+cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-licenses/texinfo/tp_maintain_lib_libintl-perl_COPYING.LESSER
 %make_install
 %find_lang texinfo_document
 %find_lang texinfo
@@ -480,15 +508,32 @@ rm -rf %{buildroot}
 /usr/share/texinfo/texinfo.dtd
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/info/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/texinfo/MiscXS.so
 /usr/lib64/texinfo/XSParagraph.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/texinfo/COPYING
+/usr/share/package-licenses/texinfo/tp_maintain_lib_libintl-perl_COPYING.LESSER
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/info.1
+/usr/share/man/man1/install-info.1
+/usr/share/man/man1/makeinfo.1
+/usr/share/man/man1/pdftexi2dvi.1
+/usr/share/man/man1/pod2texi.1
+/usr/share/man/man1/texi2any.1
+/usr/share/man/man1/texi2dvi.1
+/usr/share/man/man1/texi2pdf.1
+/usr/share/man/man1/texindex.1
+/usr/share/man/man5/info.5
+/usr/share/man/man5/texinfo.5
 
 %files locales -f texinfo_document.lang -f texinfo.lang
 %defattr(-,root,root,-)

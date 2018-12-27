@@ -1,16 +1,7 @@
 Configure miss: crtdefs.h usability
 Configure miss: crtdefs.h presence
 Configure miss: crtdefs.h
-Configure miss: xlocale.h usability
-Configure miss: xlocale.h presence
-Configure miss: xlocale.h
-Configure miss: getprogname
-Configure miss: getexecname
 Configure miss: mbslen
-Configure miss: whether wint_t is too small
-Configure miss: whether stdint.h predates C++11
-Configure miss: whether __argv is declared
-Configure miss: whether the C locale is free of encoding errors
 Configure miss: whether mbswidth is declared in <wchar.h>
 Configure miss: sys/stream.h usability
 Configure miss: sys/stream.h presence
@@ -23,8 +14,6 @@ Configure miss: cc option to accept ISO C89
 Configure miss: crtdefs.h usability
 Configure miss: crtdefs.h presence
 Configure miss: crtdefs.h
-Configure miss: whether wint_t is too small
-Configure miss: whether stdint.h predates C++11
 Configure miss: if cc supports -fno-rtti -fno-exceptions
 Configure miss: if cc static flag -static works
 Configure miss: parser tests requirements
