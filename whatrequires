@@ -5,6 +5,7 @@ bc
 binutils
 cgdb
 compat-guile-soname20
+docbook2X
 e2fsprogs
 fftw
 flex

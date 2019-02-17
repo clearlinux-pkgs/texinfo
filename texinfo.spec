@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 6.5
-Release  : 23
-URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
-Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz
-Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.5.tar.xz.sig
+Version  : 6.6
+Release  : 24
+URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.6.tar.xz
+Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.6.tar.xz
+Source99 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.6.tar.xz.sig
 Summary  : East Asian Width properties
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
@@ -22,12 +22,175 @@ Requires: texinfo-man = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : glibc-locale
 BuildRequires : ncurses-dev
+BuildRequires : nodejs
 BuildRequires : procps-ng
-Patch1: texinfo-6.5-fix-for-perl-5.28.patch
 
 %description
-the preferred documentation format for GNU software.
-2002, 2003, 2004, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017
+This file describes each of the numbered install-info tests.
+0001: The 99% case. Installing an Info file.  Take a single entry from the
+Info file and put it into a pre-existing section in the DIR file.
+0002: Installing an Info file.  Take two entries from the Info file and put
+it into a pre-existing section in the DIR file.
+0003: Installing an Info file.  Take two entries from the Info file and put
+it into a pre-existing section in the DIR file.  The entries are
+described in two different `START-INFO-DIR-ENTRY' declarations.
+0004: Installing an Info file.  Take two entries from the Info file and put
+it into two pre-existing sections in the DIR file.  The entries are
+described in two different `INFO-DIR-SECTION' and `START-INFO-DIR-ENTRY'
+declarations.
+0005: Installing an Info file.  Take two entries from the Info file and put
+it into one pre-existing section and one non-existing section in the
+DIR file.  The entries are described in two different `INFO-DIR-SECTION'
+and `START-INFO-DIR-ENTRY' declarations.
+0006: The 99% case, try 2.  Installing an Info file.  Take a single entry
+from the Info file and put it into a pre-existing section in the DIR
+file, but this time the name is not capitalized.
+0007: The 99% case, try 3.  Installing an Info file.  Take a single entry
+from the Info file and put it into a pre-existing section in the DIR
+file, but this time the entry is not the final entry in the section.
+0008: The 99% case, try 4.  Installing an Info file.  Take a single entry
+from the Info file and put it into a pre-existing section in the DIR
+file, but this time the entry's description spans more than one line.
+0009: The 99% case, try 5.  Installing an Info file.  Take a single entry
+from the Info file and put it into a pre-existing section in the DIR
+file, but this time the entry's description does not start on the
+33rd column and requires indentation.
+0010: The 99% case, try 6.  Installing an Info file.  Take a single entry
+from the Info file and put it into a pre-existing section in the DIR
+file, but this time the entry's one line description requires
+multi-line indentation.
+0011: Installing an Info file.  Take a single entry from the Info file and
+put it into a pre-existing section in the DIR file, but this time do
+not indent the description.
+0012: Installing an Info file.  Take a single entry from the Info file and
+put it into a pre-existing section in the DIR file, but this time the
+entry already exists and will be replaced.
+0013: Installing an Info file.  Take a single entry from the Info file and
+put it into a pre-existing section in the DIR file, but this time the
+entry already exists and the --keep-old option is used to override the
+replacement.
+0014: Installing an Info file.  Take a single entry from the Info file and
+put it into a pre-existing section in the DIR file, but this time the
+entry already exists with a multi-line description and will be
+replaced with a single-line description.
+0015: Installing an Info file.  Take a single entry from the Info file and
+put it into a pre-existing section in the DIR file, but this time the
+entry already exists with a single-line description and will be
+replaced with a multi-line description.
+0016: Installing an Info file.  The Info file does not contain section or
+entry hints, and neither a section nor an entry is specified on the
+command-line.  Installation does not occur, but is not an error.
+0017: Installing an initial Info file into a minimal DIR file.
+0018: Installing an initial Info file into an empty (0 byte) DIR file.
+Installation does not occur, and is an error.
+0019: Installing an initial Info file into an empty (2 byte) DIR file.
+Installation does not occur, and is an error.
+0020: Installing an Info file.  The Info file does not contain section or
+entry hints, and a section is not specified on the command-line, but
+a --description is.
+0021: Installing an Info file.  The Info file does not contain section or
+entry hints, and a pre-existing --section is stated on the command-line
+along with a --description.
+0022: Installing an Info file.  The Info file does not contain section or
+entry hints, and a --name is specified on the command-line.  The NAME
+starts with *, so the whole name (up to the period) is replaced.
+0023: Installing an Info file.  The Info file does not contain section or
+entry hints, and a --name is specified on the command-line.  The NAME
+does not start with a *, so just the name (up to the colon) is replaced.
+0024: Installing an Info file.  The Info file contains section and entry
+hints, but we override the section with a non-existing one from the
+command-line.
+0025: Installing an Info file.  The Info file contains section and entry
+hints, but we override the section with an existing one from the
+command-line.
+0026: Installing an Info file.  The Info file contains section and entry
+hints, but we override the entry with an --entry on the command-line.
+0027: Installing an Info file.  The Info file contains section and entry
+hints, but we override the entry with an --entry on the command-line,
+and we also override the section with a --section on the command-line.
+0028: Installing an Info file.  The Info file contains section and entry
+hints, but we override the name portion of the entry with a --name
+on the command-line.  The NAME starts with a `*' so it replaces the
+entire name, up to the period.
+0029: Installing an Info file.  The Info file contains section and entry
+hints, but we override the name portion of the entry with a --name
+on the command-line.  The NAME does not start with a `*' so it
+replaces the name, up to the colon and presumes the basename.
+0030: Installing an Info file.  The Info file contains section and entry
+hints, but we override the description portion of the entry with a
+--description on the command-line.
+0031: Installing an Info file.  The Info file contains section and entry
+hints, but we override the description and the name with
+--description and --name options on the command-line.  The NAME starts
+with a `*' so it replaces the entire name, up to the period.
+0032: Installing an Info file.  The Info file contains section and entry
+hints, but we try to override the section with a regular expression
+that does not match any existing sections in the DIR file.  The
+overriding cannot take place, and the entry is installed in the section
+specified in the Info file.
+0033: Installing an Info file.  The Info file contains an entry hint, but no
+section hint.  We try to specify the section with a --regex option on
+the command-line, but the regular expression does not match any
+existing sections in the DIR file.
+0034: Installing an Info file.  The Info file contains an entry hint, but
+no section hint, and we try to specify the section with a regular
+expression that does not match any existing sections in the DIR file.
+We also specify a --section on the command-line to ensure that the
+entry will be installed in a section that we explicitly name.
+0035: Installing an Info file.  The Info file contains section and entry
+hints, but we try to specify the section with a regular expression
+that does not match any existing sections in the DIR file.  We also
+specify a --section on the command-line to ensure that the entry will
+be installed in a section that we explicitly name.
+0036: Installing an Info file.  The Info file contains entry and section
+hints, but try to specify the section with a --regex option on
+the command-line, and the regular expression matches an existing
+section in the DIR file.
+0037: Installing an Info file.  The Info file contains section and entry
+hints, but we try to specify the section with a regular expression
+that does not match any existing sections in the DIR file.  We also
+specify a --section on the command-line to ensure that the entry will
+be installed in a section that we explicitly name.  We use the
+alternative Debian --section REGEX TITLE syntax instead of the normal
+GNU syntax.
+0038: Installing an Info file.  The Info file does not contain section or
+entry hints, and we specify that two entries go into two sections on
+the command-line.  One section already exists, and the other doesn't.
+0039: Installing an Info file.  The Info file contains section and entry
+hints, but we override the entry with an --entry option on the
+command-line.  The entry has a multi-line description and is not
+indented.
+0040: Installing an Info file.  The Info file contains section and entry
+hints, but we override the entry with --name and --description options
+on the command-line.  The entry is not indented.
+0041: Installing an Info file.  The Info file contains section and entry
+hints, and we're installing the entry into a gzipped DIR file.
+0042: Installing an Info file.  The Info file contains section and entry
+hints for two entries in two sections.  Both of the sections do not
+already exist in the DIR file.  The sections will be added prior to
+all other sections due to the alphabetic ordering of section names.
+0043: Installing an Info file.  The Info file contains section and entry
+hints, and we're going to install the new section admist many other
+sections.  E.g. instead of always at the very bottom or at the very
+top.
+0044: The 99% case.  Removing an Info file.  The Info file is responsible
+for a single entry in the DIR file.
+0045: Removing an Info file.  The Info file is responsible for many entries
+in the DIR file.
+0046: Removing an Info file.  We no longer have the Info file, so we
+specify --remove-exactly to remove it instead.
+0047: Removing an Info file.  The Info file is responsible for the final
+entry in the DIR file.  The section also gets removed.
+0048: Removing an Info file.  The Info file is responsible for the final
+entry in the DIR file, but we want to keep the section heading, so
+we specify --keep-old.
+0049: Removing an Info file.  The Info file is not responsible for any
+entries in the DIR file.  A warning is issued, but it isn't an error.
+0050: Removing an Info file.  The Info file is responsible for a single
+entry in the gzipped DIR file.
+0051: Allow periods in menu item name, e.g., config.status.
+0052: Allow periods in node name also, e.g., "config.status Invocation".
+0053: Check newline handling in input dir entries.
 
 %package bin
 Summary: bin components for the texinfo package.
@@ -92,15 +255,14 @@ man components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-6.5
-%patch1 -p1
+%setup -q -n texinfo-6.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545953050
+export SOURCE_DATE_EPOCH=1550422124
 %configure --disable-static --without-readline
 make  %{?_smp_mflags}
 
@@ -112,7 +274,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1545953050
+export SOURCE_DATE_EPOCH=1550422124
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp COPYING %{buildroot}/usr/share/package-licenses/texinfo/COPYING
@@ -160,15 +322,16 @@ cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-li
 /usr/share/texinfo/Texinfo/Convert/TextContent.pm
 /usr/share/texinfo/Texinfo/Convert/UnFilled.pm
 /usr/share/texinfo/Texinfo/Convert/Unicode.pm
-/usr/share/texinfo/Texinfo/Convert/XSParagraph/TestXS.pm
 /usr/share/texinfo/Texinfo/Documentlanguages.pm
 /usr/share/texinfo/Texinfo/Encoding.pm
 /usr/share/texinfo/Texinfo/MiscXS.pm
 /usr/share/texinfo/Texinfo/ModulePath.pm
 /usr/share/texinfo/Texinfo/Parser.pm
+/usr/share/texinfo/Texinfo/ParserNonXS.pm
 /usr/share/texinfo/Texinfo/Report.pm
 /usr/share/texinfo/Texinfo/Structuring.pm
 /usr/share/texinfo/Texinfo/Transformations.pm
+/usr/share/texinfo/Texinfo/XS/parsetexi/Parsetexi.pm
 /usr/share/texinfo/Texinfo/XSLoader.pm
 /usr/share/texinfo/htmlxref.cnf
 /usr/share/texinfo/init/book.pm
@@ -514,6 +677,7 @@ cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-li
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/texinfo/MiscXS.so
+/usr/lib64/texinfo/Parsetexi.so
 /usr/lib64/texinfo/XSParagraph.so
 
 %files license
