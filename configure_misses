@@ -3,15 +3,10 @@ Configure miss: mbslen
 Configure miss: 32-bit host C ABI
 Configure miss: whether mbswidth is declared in <wchar.h>
 Configure miss: working re_compile_pattern
-Configure miss: sys/stream.h usability
-Configure miss: sys/stream.h presence
-Configure miss: sys/stream.h
-Configure miss: sys/ttold.h usability
-Configure miss: sys/ttold.h presence
-Configure miss: sys/ttold.h
-Configure miss: sys/ptem.h
+Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: cc option to accept ISO C89
 Configure miss: 32-bit host C ABI
+Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: crtdefs.h
 Configure miss: if cc supports -fno-rtti -fno-exceptions
 Configure miss: if cc static flag -static works
