@@ -15,10 +15,10 @@ gcc
 gcc7
 gcc8
 gdb
+gengetopt
 glibc
 gpm
 groff
-grub
 guile
 indent
 libgfortran-avx

@@ -6,7 +6,7 @@
 #
 Name     : texinfo
 Version  : 6.7
-Release  : 25
+Release  : 26
 URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
 Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
 Source1 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
@@ -15,6 +15,7 @@ Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
 Requires: texinfo-bin = %{version}-%{release}
 Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-info = %{version}-%{release}
 Requires: texinfo-lib = %{version}-%{release}
 Requires: texinfo-license = %{version}-%{release}
 Requires: texinfo-locales = %{version}-%{release}
@@ -26,13 +27,9 @@ BuildRequires : nodejs
 BuildRequires : procps-ng
 
 %description
-This is a simple, respectively stupid Perl package that shows how the
-complete internationalization process for a Perl package *could* be
-done.  It does not claim to be the smartest or the only possible
-solution, but it provides at least a skeleton for real packages.  If
-libintl-perl should someday become an "established" Perl package, it
-would probably be a lot better to seamlessly integrate the process
-into ExtUtils::MakeMaker, but for now it's all we have.
+the preferred documentation format for GNU software.
+Home page: http://www.gnu.org/software/texinfo/
+Including links to Texinfo-related programs not part of this package.
 
 %package bin
 Summary: bin components for the texinfo package.
@@ -52,13 +49,12 @@ Group: Data
 data components for the texinfo package.
 
 
-%package doc
-Summary: doc components for the texinfo package.
-Group: Documentation
-Requires: texinfo-man = %{version}-%{release}
+%package info
+Summary: info components for the texinfo package.
+Group: Default
 
-%description doc
-doc components for the texinfo package.
+%description info
+info components for the texinfo package.
 
 
 %package lib
@@ -97,14 +93,14 @@ man components for the texinfo package.
 
 %prep
 %setup -q -n texinfo-6.7
+cd %{_builddir}/texinfo-6.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570130448
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1573774477
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -124,11 +120,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1570130448
+export SOURCE_DATE_EPOCH=1573774477
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
-cp COPYING %{buildroot}/usr/share/package-licenses/texinfo/COPYING
-cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-licenses/texinfo/tp_maintain_lib_libintl-perl_COPYING.LESSER
+cp %{_builddir}/texinfo-6.7/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-licenses/texinfo/cf756914ec51f52f9c121be247bfda232dc6afd2
 %make_install
 %find_lang texinfo_document
 %find_lang texinfo
@@ -520,9 +516,13 @@ cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-li
 /usr/share/texinfo/texindex.awk
 /usr/share/texinfo/texinfo.dtd
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/info-stnd.info
+/usr/share/info/texinfo.info
+/usr/share/info/texinfo.info-1
+/usr/share/info/texinfo.info-2
+/usr/share/info/texinfo.info-3
 
 %files lib
 %defattr(-,root,root,-)
@@ -532,8 +532,8 @@ cp tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-li
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/texinfo/COPYING
-/usr/share/package-licenses/texinfo/tp_maintain_lib_libintl-perl_COPYING.LESSER
+/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
+/usr/share/package-licenses/texinfo/cf756914ec51f52f9c121be247bfda232dc6afd2
 
 %files man
 %defattr(0644,root,root,0755)
