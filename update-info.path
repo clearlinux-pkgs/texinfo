@@ -1,0 +1,11 @@
+# -*- conf -*-
+[Unit]
+Description=Watch for changes in the GNU Info manuals
+After=local-fs.target
+
+[Path]
+PathChanged=/usr/share/info
+PathChanged=/usr/local/share/info
+
+[Install]
+WantedBy=default.target

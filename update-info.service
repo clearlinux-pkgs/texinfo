@@ -1,0 +1,15 @@
+# -*- conf -*-
+[Unit]
+Description=Update the GNU Info node directory
+Wants=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/update-info
+StateDirectory=info
+Nice=19
+CPUSchedulingPolicy=idle
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,23 @@
+#!/bin/sh
+if ! [ -d "$STATE_DIRECTORY" ]; then
+    printf >&2 "%s: Not a directory: %s\n" "$0" "$STATE_DIRECTORY"
+    exit 5
+fi
+
+recreate=
+dirnode="$STATE_DIRECTORY/dir"
+
+dirs=`cat /etc/info.conf /etc/info-dir.d/*.conf 2>/dev/null`
+dirs="$dirs /usr/local/share/info /usr/share/info"
+searchdirs=
+for dir in $dirs; do
+    if [ -d "$dir" ]; then
+        searchdirs="$searchdirs $dir"
+    fi
+    if [ "$dir" -nt "$dirnode" ]; then
+        recreate=1
+    fi
+done
+test -n "$recreate" || exit 0
+find $searchdirs -name '*.info*' -type f -print0 | \
+    exec xargs -0rn1 /sbin/install-info --dir-file="$dirnode"

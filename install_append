@@ -1,0 +1,5 @@
+#!rpm
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../update-info.path %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
+%define keepinfodir 1

@@ -6,20 +6,26 @@
 #
 Name     : texinfo
 Version  : 6.7
-Release  : 26
+Release  : 27
 URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
 Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
-Source1 : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
+Source1  : update-info.path
+Source2  : update-info.service
+Source3  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
+Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
+Requires: texinfo-autostart = %{version}-%{release}
 Requires: texinfo-bin = %{version}-%{release}
 Requires: texinfo-data = %{version}-%{release}
 Requires: texinfo-info = %{version}-%{release}
 Requires: texinfo-lib = %{version}-%{release}
+Requires: texinfo-libexec = %{version}-%{release}
 Requires: texinfo-license = %{version}-%{release}
 Requires: texinfo-locales = %{version}-%{release}
 Requires: texinfo-man = %{version}-%{release}
+Requires: texinfo-services = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : glibc-locale
 BuildRequires : ncurses-dev
@@ -31,11 +37,21 @@ the preferred documentation format for GNU software.
 Home page: http://www.gnu.org/software/texinfo/
 Including links to Texinfo-related programs not part of this package.
 
+%package autostart
+Summary: autostart components for the texinfo package.
+Group: Default
+
+%description autostart
+autostart components for the texinfo package.
+
+
 %package bin
 Summary: bin components for the texinfo package.
 Group: Binaries
 Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-libexec = %{version}-%{release}
 Requires: texinfo-license = %{version}-%{release}
+Requires: texinfo-services = %{version}-%{release}
 
 %description bin
 bin components for the texinfo package.
@@ -61,10 +77,20 @@ info components for the texinfo package.
 Summary: lib components for the texinfo package.
 Group: Libraries
 Requires: texinfo-data = %{version}-%{release}
+Requires: texinfo-libexec = %{version}-%{release}
 Requires: texinfo-license = %{version}-%{release}
 
 %description lib
 lib components for the texinfo package.
+
+
+%package libexec
+Summary: libexec components for the texinfo package.
+Group: Default
+Requires: texinfo-license = %{version}-%{release}
+
+%description libexec
+libexec components for the texinfo package.
 
 
 %package license
@@ -91,6 +117,14 @@ Group: Default
 man components for the texinfo package.
 
 
+%package services
+Summary: services components for the texinfo package.
+Group: Systemd services
+
+%description services
+services components for the texinfo package.
+
+
 %prep
 %setup -q -n texinfo-6.7
 cd %{_builddir}/texinfo-6.7
@@ -100,7 +134,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573774477
+export SOURCE_DATE_EPOCH=1575412511
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -120,7 +154,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1573774477
+export SOURCE_DATE_EPOCH=1575412511
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp %{_builddir}/texinfo-6.7/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
@@ -128,9 +162,24 @@ cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildr
 %make_install
 %find_lang texinfo_document
 %find_lang texinfo
+mkdir -p %{buildroot}/usr/lib/systemd/system
+install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/update-info.path
+install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/update-info.service
+mkdir -p %{buildroot}/usr/libexec
+install -m 0755 %{_sourcedir}/update-info %{buildroot}/usr/libexec/
+## install_append content
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../update-info.path %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
+%define keepinfodir 1
+## install_append end
 
 %files
 %defattr(-,root,root,-)
+
+%files autostart
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/multi-user.target.wants/update-info.path
 
 %files bin
 %defattr(-,root,root,-)
@@ -518,6 +567,7 @@ cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildr
 
 %files info
 %defattr(0644,root,root,0755)
+/usr/share/info/dir
 /usr/share/info/info-stnd.info
 /usr/share/info/texinfo.info
 /usr/share/info/texinfo.info-1
@@ -529,6 +579,10 @@ cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildr
 /usr/lib64/texinfo/MiscXS.so
 /usr/lib64/texinfo/Parsetexi.so
 /usr/lib64/texinfo/XSParagraph.so
+
+%files libexec
+%defattr(-,root,root,-)
+/usr/libexec/update-info
 
 %files license
 %defattr(0644,root,root,0755)
@@ -548,6 +602,12 @@ cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildr
 /usr/share/man/man1/texindex.1
 /usr/share/man/man5/info.5
 /usr/share/man/man5/texinfo.5
+
+%files services
+%defattr(-,root,root,-)
+%exclude /usr/lib/systemd/system/multi-user.target.wants/update-info.path
+/usr/lib/systemd/system/update-info.path
+/usr/lib/systemd/system/update-info.service
 
 %files locales -f texinfo_document.lang -f texinfo.lang
 %defattr(-,root,root,-)
