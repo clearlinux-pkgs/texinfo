@@ -6,12 +6,12 @@
 #
 Name     : texinfo
 Version  : 6.7
-Release  : 27
-URL      : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
-Source0  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
+Release  : 28
+URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
 Source1  : update-info.path
 Source2  : update-info.service
-Source3  : http://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
+Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
 Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
@@ -134,14 +134,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575412511
+export SOURCE_DATE_EPOCH=1605298468
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --without-readline
 make  %{?_smp_mflags}
@@ -151,10 +151,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1575412511
+export SOURCE_DATE_EPOCH=1605298468
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp %{_builddir}/texinfo-6.7/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
