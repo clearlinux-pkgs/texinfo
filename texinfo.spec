@@ -5,17 +5,17 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 6.7
-Release  : 28
-URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
-Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz
+Version  : 6.8
+Release  : 29
+URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz
 Source1  : update-info.path
 Source2  : update-info.service
-Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.7.tar.xz.sig
+Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz.sig
 Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
-License  : GPL-3.0 GPL-3.0+ LGPL-2.1 MIT
+License  : GPL-3.0 GPL-3.0+ MIT
 Requires: texinfo-autostart = %{version}-%{release}
 Requires: texinfo-bin = %{version}-%{release}
 Requires: texinfo-data = %{version}-%{release}
@@ -126,15 +126,15 @@ services components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-6.7
-cd %{_builddir}/texinfo-6.7
+%setup -q -n texinfo-6.8
+cd %{_builddir}/texinfo-6.8
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605298468
+export SOURCE_DATE_EPOCH=1625591235
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -154,11 +154,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1605298468
+export SOURCE_DATE_EPOCH=1625591235
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
-cp %{_builddir}/texinfo-6.7/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/texinfo-6.7/tp/maintain/lib/libintl-perl/COPYING.LESSER %{buildroot}/usr/share/package-licenses/texinfo/cf756914ec51f52f9c121be247bfda232dc6afd2
+cp %{_builddir}/texinfo-6.8/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/texinfo-6.8/tp/maintain/lib/libintl-perl/COPYING %{buildroot}/usr/share/package-licenses/texinfo/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
 %find_lang texinfo_document
 %find_lang texinfo
@@ -231,9 +231,13 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 /usr/share/texinfo/htmlxref.cnf
 /usr/share/texinfo/init/book.pm
 /usr/share/texinfo/init/chm.pm
+/usr/share/texinfo/init/highlight_syntax.pm
 /usr/share/texinfo/init/html32.pm
 /usr/share/texinfo/init/latex2html.pm
 /usr/share/texinfo/init/tex4ht.pm
+/usr/share/texinfo/js/info.css
+/usr/share/texinfo/js/info.js
+/usr/share/texinfo/js/modernizr.js
 /usr/share/texinfo/lib/Text-Unidecode/lib/Text/Unidecode.pm
 /usr/share/texinfo/lib/Text-Unidecode/lib/Text/Unidecode/x00.pm
 /usr/share/texinfo/lib/Text-Unidecode/lib/Text/Unidecode/x01.pm
@@ -561,6 +565,7 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 /usr/share/texinfo/lib/libintl-perl/lib/Locale/RecodeData/_Encode.pm
 /usr/share/texinfo/lib/libintl-perl/lib/Locale/TextDomain.pm
 /usr/share/texinfo/lib/libintl-perl/lib/Locale/Util.pm
+/usr/share/texinfo/lib/libintl-perl/lib/Locale/gettext_dumb.pm
 /usr/share/texinfo/lib/libintl-perl/lib/Locale/gettext_pp.pm
 /usr/share/texinfo/texindex.awk
 /usr/share/texinfo/texinfo.dtd
@@ -587,7 +592,7 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
-/usr/share/package-licenses/texinfo/cf756914ec51f52f9c121be247bfda232dc6afd2
+/usr/share/package-licenses/texinfo/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files man
 %defattr(0644,root,root,0755)

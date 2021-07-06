@@ -1,13 +1,27 @@
-Configure miss: crtdefs.h
-Configure miss: mbslen
 Configure miss: 32-bit host C ABI
-Configure miss: whether mbswidth is declared in <wchar.h>
-Configure miss: working re_compile_pattern
-Configure miss: CFLocaleCopyPreferredLanguages
-Configure miss: cc option to accept ISO C89
 Configure miss: 32-bit host C ABI
 Configure miss: CFLocaleCopyPreferredLanguages
+Configure miss: CFLocaleCopyPreferredLanguages
+Configure miss: cc option to enable C11 features
+Configure miss: cc options needed to detect all undeclared functions
+Configure miss: compiler option needed when checking for declarations
+Configure miss: compiler option needed when checking for declarations
 Configure miss: crtdefs.h
-Configure miss: if cc supports -fno-rtti -fno-exceptions
+Configure miss: crtdefs.h
+Configure miss: eslint
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: if cc static flag -static works
+Configure miss: if cc supports -fno-rtti -fno-exceptions
+Configure miss: mbslen
+Configure miss: modernizr
 Configure miss: parser tests requirements
+Configure miss: tsc
+Configure miss: uglifyjs
+Configure miss: whether mbrtowc stores incomplete characters
+Configure miss: whether mbswidth is declared in <wchar.h>
+Configure miss: whether pthread_rwlock_rdlock prefers a writer to a reader
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler is clang
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: whether the compiler produces multi-arch binaries
+Configure miss: working re_compile_pattern
