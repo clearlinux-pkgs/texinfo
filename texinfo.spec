@@ -5,13 +5,13 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 6.8
-Release  : 29
-URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz
-Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz
+Version  : 7.0
+Release  : 30
+URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz
 Source1  : update-info.path
 Source2  : update-info.service
-Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-6.8.tar.xz.sig
+Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz.sig
 Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
@@ -29,13 +29,11 @@ Requires: texinfo-services = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : glibc-locale
 BuildRequires : ncurses-dev
-BuildRequires : nodejs
 BuildRequires : procps-ng
 
 %description
 the preferred documentation format for GNU software.
-Home page: http://www.gnu.org/software/texinfo/
-Including links to Texinfo-related programs not part of this package.
+Home page: https://www.gnu.org/software/texinfo/
 
 %package autostart
 Summary: autostart components for the texinfo package.
@@ -126,23 +124,23 @@ services components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-6.8
-cd %{_builddir}/texinfo-6.8
+%setup -q -n texinfo-7.0
+cd %{_builddir}/texinfo-7.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1625591235
+export SOURCE_DATE_EPOCH=1667869664
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static --without-readline
 make  %{?_smp_mflags}
 
@@ -154,11 +152,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1625591235
+export SOURCE_DATE_EPOCH=1667869664
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
-cp %{_builddir}/texinfo-6.8/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/texinfo-6.8/tp/maintain/lib/libintl-perl/COPYING %{buildroot}/usr/share/package-licenses/texinfo/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/texinfo-%{version}/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615 || :
+cp %{_builddir}/texinfo-%{version}/tp/maintain/lib/libintl-perl/COPYING %{buildroot}/usr/share/package-licenses/texinfo/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 %make_install
 %find_lang texinfo_document
 %find_lang texinfo
@@ -197,28 +195,31 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 %defattr(-,root,root,-)
 /usr/share/texinfo/DebugTexinfo/DebugTree.pm
 /usr/share/texinfo/Pod-Simple-Texinfo/Pod/Simple/Texinfo.pm
+/usr/share/texinfo/Texinfo/Commands.pm
+/usr/share/texinfo/Texinfo/Commands.pod
 /usr/share/texinfo/Texinfo/Common.pm
+/usr/share/texinfo/Texinfo/Config.pm
 /usr/share/texinfo/Texinfo/Convert/Converter.pm
 /usr/share/texinfo/Texinfo/Convert/DocBook.pm
 /usr/share/texinfo/Texinfo/Convert/HTML.pm
 /usr/share/texinfo/Texinfo/Convert/IXIN.pm
 /usr/share/texinfo/Texinfo/Convert/IXINSXML.pm
 /usr/share/texinfo/Texinfo/Convert/Info.pm
-/usr/share/texinfo/Texinfo/Convert/Line.pm
+/usr/share/texinfo/Texinfo/Convert/LaTeX.pm
 /usr/share/texinfo/Texinfo/Convert/NodeNameNormalization.pm
 /usr/share/texinfo/Texinfo/Convert/Paragraph.pm
 /usr/share/texinfo/Texinfo/Convert/ParagraphNonXS.pm
 /usr/share/texinfo/Texinfo/Convert/PlainTexinfo.pm
 /usr/share/texinfo/Texinfo/Convert/Plaintext.pm
 /usr/share/texinfo/Texinfo/Convert/Texinfo.pm
+/usr/share/texinfo/Texinfo/Convert/TexinfoMarkup.pm
 /usr/share/texinfo/Texinfo/Convert/TexinfoSXML.pm
 /usr/share/texinfo/Texinfo/Convert/TexinfoXML.pm
 /usr/share/texinfo/Texinfo/Convert/Text.pm
 /usr/share/texinfo/Texinfo/Convert/TextContent.pm
-/usr/share/texinfo/Texinfo/Convert/UnFilled.pm
 /usr/share/texinfo/Texinfo/Convert/Unicode.pm
+/usr/share/texinfo/Texinfo/Convert/Utils.pm
 /usr/share/texinfo/Texinfo/Documentlanguages.pm
-/usr/share/texinfo/Texinfo/Encoding.pm
 /usr/share/texinfo/Texinfo/MiscXS.pm
 /usr/share/texinfo/Texinfo/ModulePath.pm
 /usr/share/texinfo/Texinfo/Parser.pm
@@ -226,15 +227,18 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 /usr/share/texinfo/Texinfo/Report.pm
 /usr/share/texinfo/Texinfo/Structuring.pm
 /usr/share/texinfo/Texinfo/Transformations.pm
+/usr/share/texinfo/Texinfo/Translations.pm
 /usr/share/texinfo/Texinfo/XS/parsetexi/Parsetexi.pm
 /usr/share/texinfo/Texinfo/XSLoader.pm
+/usr/share/texinfo/ext/epub3.pm
+/usr/share/texinfo/ext/latex2html.pm
+/usr/share/texinfo/ext/tex4ht.pm
 /usr/share/texinfo/htmlxref.cnf
 /usr/share/texinfo/init/book.pm
 /usr/share/texinfo/init/chm.pm
+/usr/share/texinfo/init/documentation_examples.pm
 /usr/share/texinfo/init/highlight_syntax.pm
 /usr/share/texinfo/init/html32.pm
-/usr/share/texinfo/init/latex2html.pm
-/usr/share/texinfo/init/tex4ht.pm
 /usr/share/texinfo/js/info.css
 /usr/share/texinfo/js/info.js
 /usr/share/texinfo/js/modernizr.js
@@ -574,6 +578,8 @@ ln -s ../../../var/lib/info/dir %{buildroot}/usr/share/info
 %defattr(0644,root,root,0755)
 /usr/share/info/dir
 /usr/share/info/info-stnd.info
+/usr/share/info/texi2any_api.info
+/usr/share/info/texi2any_internals.info
 /usr/share/info/texinfo.info
 /usr/share/info/texinfo.info-1
 /usr/share/info/texinfo.info-2
