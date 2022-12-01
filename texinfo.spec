@@ -5,13 +5,13 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 7.0
-Release  : 30
-URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz
-Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz
+Version  : 7.0.1
+Release  : 31
+URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz
 Source1  : update-info.path
 Source2  : update-info.service
-Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.tar.xz.sig
+Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz.sig
 Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
@@ -124,15 +124,15 @@ services components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-7.0
-cd %{_builddir}/texinfo-7.0
+%setup -q -n texinfo-7.0.1
+cd %{_builddir}/texinfo-7.0.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667869664
+export SOURCE_DATE_EPOCH=1669939008
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -152,7 +152,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1667869664
+export SOURCE_DATE_EPOCH=1669939008
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp %{_builddir}/texinfo-%{version}/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615 || :
