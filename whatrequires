@@ -16,6 +16,7 @@ gcc7
 gcc8
 gcc9
 gdb
+gengetopt
 ghc
 glibc
 gpm

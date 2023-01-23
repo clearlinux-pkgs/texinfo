@@ -5,13 +5,13 @@
 # Source0 file verified with key 0xDDBC579DAB37FBA9 (GavinSmith0123@gmail.com)
 #
 Name     : texinfo
-Version  : 7.0.1
-Release  : 31
-URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz
-Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz
+Version  : 7.0.2
+Release  : 32
+URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.2.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.2.tar.xz
 Source1  : update-info.path
 Source2  : update-info.service
-Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.1.tar.xz.sig
+Source3  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.0.2.tar.xz.sig
 Source4  : update-info
 Summary  : East Asian Width properties
 Group    : Development/Tools
@@ -30,6 +30,9 @@ BuildRequires : buildreq-cpan
 BuildRequires : glibc-locale
 BuildRequires : ncurses-dev
 BuildRequires : procps-ng
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 the preferred documentation format for GNU software.
@@ -124,23 +127,23 @@ services components for the texinfo package.
 
 
 %prep
-%setup -q -n texinfo-7.0.1
-cd %{_builddir}/texinfo-7.0.1
+%setup -q -n texinfo-7.0.2
+cd %{_builddir}/texinfo-7.0.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669939008
+export SOURCE_DATE_EPOCH=1674501203
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static --without-readline
 make  %{?_smp_mflags}
 
@@ -152,7 +155,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1669939008
+export SOURCE_DATE_EPOCH=1674501203
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp %{_builddir}/texinfo-%{version}/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615 || :
