@@ -5,8 +5,10 @@ binutils
 cgdb
 compat-gcc-10
 compat-libffi-soname6
+compat-libffi-soname7
 docbook2X
 e2fsprogs
+emacs
 emacs-x11
 fftw
 flex
@@ -17,7 +19,6 @@ gcc8
 gcc9
 gdb
 gengetopt
-ghc
 glibc
 gpm
 groff
@@ -29,6 +30,7 @@ mingw-binutils
 mingw-gcc
 mtools
 mutt
+nano
 nettle
 octave
 pspp
