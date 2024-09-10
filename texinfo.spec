@@ -9,7 +9,7 @@
 #
 Name     : texinfo
 Version  : 7.1.1
-Release  : 35
+Release  : 36
 URL      : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.1.1.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/texinfo/texinfo-7.1.1.tar.gz
 Source1  : update-info.path
@@ -19,7 +19,7 @@ Source4  : DDBC579DAB37FBA9.pkey
 Source5  : update-info
 Summary  : 'High-Level Interface to Uniforum Message Translation'
 Group    : Development/Tools
-License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-3.0 GPL-3.0+ cc0
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-3.0 GPL-3.0+
 Requires: texinfo-autostart = %{version}-%{release}
 Requires: texinfo-bin = %{version}-%{release}
 Requires: texinfo-data = %{version}-%{release}
@@ -147,7 +147,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1725989559
+export SOURCE_DATE_EPOCH=1725990368
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -188,7 +188,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1725989559
+export SOURCE_DATE_EPOCH=1725990368
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/texinfo
 cp %{_builddir}/texinfo-%{version}/COPYING %{buildroot}/usr/share/package-licenses/texinfo/31a3d460bb3c7d98845187c716a30db81c44b615 || :
