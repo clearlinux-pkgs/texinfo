@@ -5,6 +5,7 @@ Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: bool, true, false
 Configure miss: bool, true, false
 Configure miss: cc option to enable C11 features
+Configure miss: cc option to support large files
 Configure miss: cc options needed to detect all undeclared functions
 Configure miss: compiler option needed when checking for declarations
 Configure miss: compiler option needed when checking for declarations
@@ -17,12 +18,12 @@ Configure miss: if cc static flag -static works
 Configure miss: if cc supports -fno-rtti -fno-exceptions
 Configure miss: mbslen
 Configure miss: modernizr
-Configure miss: obstacks that work with any size object
 Configure miss: parser tests requirements
 Configure miss: tsc
 Configure miss: uglifyjs
 Configure miss: unreachable
 Configure miss: unreachable
+Configure miss: whether _putenv is declared
 Configure miss: whether ctype.h defines __header_inline
 Configure miss: whether ctype.h defines __header_inline
 Configure miss: whether float.h conforms to ISO C23
@@ -30,6 +31,8 @@ Configure miss: whether mbrtowc stores incomplete characters
 Configure miss: whether mbswidth is declared in <wchar.h>
 Configure miss: whether nullptr_t needs <stddef.h>
 Configure miss: whether nullptr_t needs <stddef.h>
+Configure miss: whether realloc (..., 0) returns nonnull
+Configure miss: whether realloc should abort upon undefined behaviour
 Configure miss: whether the compiler is clang
 Configure miss: whether the compiler is clang
 Configure miss: whether the compiler produces multi-arch binaries

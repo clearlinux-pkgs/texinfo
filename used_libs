@@ -1,3 +1,5 @@
 ld-linux-x86-64.so.2
 libc.so.6
+libtexinfo-convertxs.so.0
+libtexinfoxs.so.0
 libunistring.so.5
